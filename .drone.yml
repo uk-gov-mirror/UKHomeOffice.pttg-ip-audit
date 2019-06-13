@@ -25,7 +25,7 @@ pipeline:
     commands:
       - docker build -t pttg-ip-audit .
     when:
-      branch: [master, refs/tags/*]
+      branch: [master, refs/tags/*, EE-19133-get-events-for-correlation-id]
       event: [push, tag]
 
   install-docker-image:
@@ -39,7 +39,7 @@ pipeline:
       - docker tag pttg-ip-audit quay.io/ukhomeofficedigital/pttg-ip-audit:build-$${DRONE_BUILD_NUMBER}
       - docker push quay.io/ukhomeofficedigital/pttg-ip-audit:build-$${DRONE_BUILD_NUMBER}
     when:
-      branch: [master]
+      branch: [master, EE-19133-get-events-for-correlation-id]
       event: push
 
   tag-docker-image-with-git-tag:
@@ -75,7 +75,7 @@ pipeline:
       - cd kube-pttg-ip-audit
       - ./deploy.sh
     when:
-      branch: [master]
+      branch: [master, EE-19133-get-events-for-correlation-id]
       event: [push, tag]
 
   deployment:
