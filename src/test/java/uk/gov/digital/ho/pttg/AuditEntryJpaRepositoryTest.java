@@ -47,6 +47,13 @@ public class AuditEntryJpaRepositoryTest {
 
     @Before
     public void setup() {
+
+        List<AuditEntry> all = repository.findAllIpsStatistics();
+        System.out.println(String.format("Found %d ips records already in database", all.size());
+        all.stream().forEach(audit -> System.out.println(String.format("Found %s", audit.getUuid())));
+
+
+        System.out.println();
         repository.save(createAudit(TWO_DAYS_AGO));
         repository.save(createAudit(YESTERDAY));
         repository.save(createAudit(NOW_MINUS_60_MINS));
