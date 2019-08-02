@@ -49,7 +49,7 @@ public class AuditEntryJpaRepositoryTest {
     public void setup() {
 
         List<AuditEntry> all = repository.findAllIpsStatistics();
-        System.out.println(String.format("Found %d ips records already in database", all.size());
+        System.out.println(String.format("Found %d ips records already in database", all.size()));
         all.stream().forEach(audit -> System.out.println(String.format("Found %s", audit.getUuid())));
 
 
