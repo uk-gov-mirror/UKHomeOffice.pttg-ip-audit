@@ -110,3 +110,17 @@ pipeline:
       event: deployment
       environment: pr
 
+  run-smoke-tests:
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
+    drone_server: https://drone.acp.homeoffice.gov.uk
+    secrets:
+      - DRONE_TOKEN
+      - pttg_ip_dev
+      - pttg_ip_test
+      - pttg_ip_pr
+    repo: UKHomeOffice/kube-pttg-ip-smoke-tests
+    branch: master
+    deploy_to: ${DRONE_DEPLOY_TO}
+    params: KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO}
+    when:
+      event: push # TODO OJR EE-6825 - set for testing, should be deployment
