@@ -118,7 +118,7 @@ pipeline:
       - pttg_ip_dev
       - pttg_ip_test
       - pttg_ip_pr
-    repo: UKHomeOffice/kube-pttg-ip-smoke-tests
+    repo: UKHomeOffice/pttg-ip-smoke-tests
     branch: master
     deploy_to: ${DRONE_DEPLOY_TO}
     params: KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO}
