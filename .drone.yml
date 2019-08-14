@@ -114,6 +114,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
     drone_server: https://drone.acp.homeoffice.gov.uk
     secrets:
+      - DRONE_TOKEN
       - pttg_ip_dev
       - pttg_ip_test
       - pttg_ip_pr
