@@ -121,6 +121,6 @@ pipeline:
     repo: UKHomeOffice/pttg-ip-smoke-tests
     branch: master
     deploy_to: ${DRONE_DEPLOY_TO}
-    params: KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO} KUBE_BRANCH=EE-6825-use-latest # TODO EE-6825 Temporarily using branch for development
+    params: KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO},KUBE_BRANCH=EE-6825-use-latest # TODO EE-6825 Temporarily using branch for development
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
