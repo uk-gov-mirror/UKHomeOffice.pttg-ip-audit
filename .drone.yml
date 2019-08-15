@@ -1,11 +1,11 @@
 pipeline:
-
-  build-project:
-    image: quay.io/ukhomeofficedigital/openjdk8:v1.1.0
-    commands:
-      - ./gradlew build --max-workers 1
-    when:
-      event: [push, pull_request, tag]
+#
+#  build-project:
+#    image: quay.io/ukhomeofficedigital/openjdk8:v1.1.0
+#    commands:
+#      - ./gradlew build --max-workers 1
+#    when:
+#      event: [push, pull_request, tag]
 
   update-version:
     image: quay.io/ukhomeofficedigital/docker-openjdk8-git:v1.5.0
@@ -55,12 +55,12 @@ pipeline:
     when:
       event: tag
 
-  clone-kube-project:
-    image: plugins/git
-    commands:
-      - git clone https://github.com/UKHomeOffice/kube-pttg-ip-audit.git
-    when:
-      event: [push, tag, deployment]
+#  clone-kube-project:
+#    image: plugins/git
+#    commands:
+#      - git clone https://github.com/UKHomeOffice/kube-pttg-ip-audit.git
+#    when:
+#      event: [push, tag, deployment]
 
   deploy-to-dev-from-build-number:
     image: quay.io/ukhomeofficedigital/kd:v0.8.0
@@ -110,7 +110,7 @@ pipeline:
       event: deployment
       environment: pr
 
-  run-smoke-tests:
+  run-smoke-tests-dev:
     image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
     drone_server: https://drone.acp.homeoffice.gov.uk
     secrets:
@@ -120,7 +120,7 @@ pipeline:
       - pttg_ip_pr
     repo: UKHomeOffice/pttg-ip-smoke-tests
     branch: master
-    deploy_to: ${DRONE_DEPLOY_TO}
-    params: KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO},KUBE_BRANCH=EE-6825-use-latest # TODO EE-6825 Temporarily using branch for development
+    deploy_to: dev
+    params: KUBE_BRANCH=EE-6825-use-latest # TODO EE-6825 Temporarily using branch for development
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
