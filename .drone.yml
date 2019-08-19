@@ -119,7 +119,7 @@ pipeline:
       - pttg_ip_test
       - pttg_ip_pr
     repo: UKHomeOffice/pttg-ip-smoke-tests
-    branch: master
+    branch: EE-6825-sort-kd-flags # TODO OJR EE-6825 Temporary change for testing
     deploy_to: dev
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
