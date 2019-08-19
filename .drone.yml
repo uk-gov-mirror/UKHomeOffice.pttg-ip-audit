@@ -121,5 +121,6 @@ pipeline:
     repo: UKHomeOffice/pttg-ip-smoke-tests
     branch: master
     deploy_to: dev
+    params: KUBE_BRANCH=EE-6825-sort-kd-flags # TODO EE-6825 Temporarily using feature branch for deployments
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
