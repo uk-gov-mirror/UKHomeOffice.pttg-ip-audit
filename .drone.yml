@@ -111,16 +111,11 @@ pipeline:
       environment: pr
 
   run-smoke-tests-dev:
-    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
-    drone_server: https://drone.acp.homeoffice.gov.uk
+    image: quay.io/ukhomeofficedigital/kd:v1.14.0
     secrets:
-      - DRONE_TOKEN
       - pttg_ip_dev
-      - pttg_ip_test
-      - pttg_ip_pr
-    repo: UKHomeOffice/pttg-ip-smoke-tests
-    branch: master
-    deploy_to: dev
-    params: KUBE_BRANCH=EE-6825-sort-kd-flags # TODO EE-6825 Temporarily using feature branch for deployments
+    commands:
+      - SMOKE_TEST_POD=$(kubectl get pods | grep pttg-ip-smoke-tests | head --lines=1 | cut -d ' ' -f 1)
+      - kubectl exec $SMOKE_TEST_POD -- curl -X POST 'http://localhost:8080/smoketest'
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
