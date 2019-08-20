@@ -115,7 +115,7 @@ pipeline:
     secrets:
       - pttg_ip_dev
     commands:
-      - SMOKE_TEST_POD=$(kubectl get pods | grep pttg-ip-smoke-tests | head -n=1 | cut -d ' ' -f 1)
+      - SMOKE_TEST_POD=$(kubectl get pods | grep pttg-ip-smoke-tests | head -n 1 | cut -d ' ' -f 1)
       - kubectl exec $SMOKE_TEST_POD -- curl -X POST 'http://localhost:8080/smoketest'
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
