@@ -117,6 +117,6 @@ pipeline:
     commands:
       - SMOKE_TEST_POD=$(kubectl --insecure-skip-tls-verify=true --token="$${PTTG_IP_DEV}" --server=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk get pods --namespace=pttg-ip-dev | grep pttg-ip-smoke-tests | head -n 1 | cut -d ' ' -f 1)
       - echo SMOKE_TEST_POD = $SMOKE_TEST_POD
-      - kubectl --insecure-skip-tls-verify=true --token="$${PTTG_IP_DEV}" --server=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk --namespace=pttg-ip-dev exec ${SMOKE_TEST_POD} -- curl -X POST 'http://localhost:8080/smoketest'
+      - kubectl --insecure-skip-tls-verify=true --token="$${PTTG_IP_DEV}" --server=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk --namespace=pttg-ip-dev exec "$${SMOKE_TEST_POD}" -- curl -X POST 'http://localhost:8080/smoketest'
     when:
       event: push # TODO OJR EE-6825 - set for testing, should be deployment
