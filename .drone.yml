@@ -110,3 +110,34 @@ pipeline:
       event: deployment
       environment: pr
 
+  deploy-to-feat:
+    image: quay.io/ukhomeofficedigital/kd:v0.8.0
+    environment:
+      - KUBE_NAMESPACE=pttg-ip-${DRONE_DEPLOY_TO}
+      - ENVIRONMENT=${DRONE_DEPLOY_TO}
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+    secrets:
+      - pttg_ip_feat1
+      - pttg_ip_feat2
+      - pttg_ip_feat3
+    commands:
+      - cd kube-pttg-ip-audit
+      - ./deploy.sh
+    when:
+      event: deployment
+      environment: [feat1, feat2, feat3]
+
+  deploy-to-preprod:
+    image: quay.io/ukhomeofficedigital/kd:v0.8.0
+    environment:
+      - KUBE_NAMESPACE=pttg-ip-preprod
+      - ENVIRONMENT=preprod
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+    secrets:
+      - pttg_ip_preprod
+    commands:
+      - cd kube-pttg-ip-audit
+      - ./deploy.sh
+    when:
+      event: deployment
+      environment: preprod
