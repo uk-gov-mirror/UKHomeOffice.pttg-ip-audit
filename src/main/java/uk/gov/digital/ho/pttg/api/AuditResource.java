@@ -44,18 +44,18 @@ public class AuditResource {
 
     @PostMapping(value = "/audit", consumes = APPLICATION_JSON_VALUE)
     public void recordAuditEntry(@RequestBody AuditableData auditableData) {
-
-        log.info("Audit request {} received for correlation id {}",
-                    auditableData.getEventType(),
-                    auditableData.getCorrelationId(),
-                    value(EVENT, PTTG_AUDIT_REQUEST_RECEIVED));
-
-        auditService.add(auditableData);
-
-        log.info("Audit request {} completed for correlation id {}",
-                    auditableData.getEventType(),
-                    auditableData.getCorrelationId(),
-                    value(EVENT, PTTG_AUDIT_REQUEST_COMPLETED),
-                    value(REQUEST_DURATION_MS, requestData.calculateRequestDuration()));
+        throw new NullPointerException();
+//        log.info("Audit request {} received for correlation id {}",
+//                    auditableData.getEventType(),
+//                    auditableData.getCorrelationId(),
+//                    value(EVENT, PTTG_AUDIT_REQUEST_RECEIVED));
+//
+//        auditService.add(auditableData);
+//
+//        log.info("Audit request {} completed for correlation id {}",
+//                    auditableData.getEventType(),
+//                    auditableData.getCorrelationId(),
+//                    value(EVENT, PTTG_AUDIT_REQUEST_COMPLETED),
+//                    value(REQUEST_DURATION_MS, requestData.calculateRequestDuration()));
     }
 }
